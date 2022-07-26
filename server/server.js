@@ -52,3 +52,11 @@ app.get("/api/data", authenticator, (req, res) => {
 app.listen(port, () => {
   console.log(`server listening on port ${port}`);
 });
+
+//Autthenticatioon workflow in frontend:
+/*
+  1. Start with login
+  2. Handle the authentication request.
+  3. Handle the logout
+
+*/

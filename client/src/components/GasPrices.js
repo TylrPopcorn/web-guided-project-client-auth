@@ -2,11 +2,12 @@ import React from 'react';
 import moment from 'moment';
 import Loader from 'react-loader-spinner';
 
+import axios from "axios"
 class GasPrices extends React.Component {
   state = {
     gasPrices: []
   };
-  
+
 
   formatData = () => {
     const formattedData = [];
@@ -22,6 +23,28 @@ class GasPrices extends React.Component {
     });
     return formattedData;
   };
+
+  getData = () => {
+    axios.get("https://loccalhost:5001/api/data", {
+      headers: {
+        authorization: localStorage.getItem("token")
+      }
+    })
+      .then(res => {
+        // console.log(res)
+
+        this.setState({
+          gasPrices: res.data.data
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  componentDidMount() {
+    this.getData()
+  }
 
   render() {
     const gasPrices = this.formatData();
